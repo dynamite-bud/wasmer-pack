@@ -104,9 +104,8 @@ fn snapshot_generated_bindings(
     settings.set_omit_expression(true);
     settings.add_filter(r"wasmer-pack v\d+\.\d+\.\d+", "wasmer-pack vX.Y.Z");
 
-    if cfg!(target_os = "windows") {
-        settings.add_filter(r"\\\\", "/");
-    }
+    // replace the `\\` with `/` for windows path management in `all files.snap`
+    settings.add_filter(r"\\\\", "/");
 
     let _guard = settings.bind_to_scope();
 
